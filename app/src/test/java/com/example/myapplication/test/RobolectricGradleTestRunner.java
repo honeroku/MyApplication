@@ -20,8 +20,7 @@ public class RobolectricGradleTestRunner extends RobolectricTestRunner {
             return new AndroidManifest(Fs.fileFromPath(manifestProperty), Fs.fileFromPath(resProperty),
                     Fs.fileFromPath(assetsProperty));
         }
-        AndroidManifest appManifest = super.getAppManifest(config);
-        return appManifest;
+        return  super.getAppManifest(config);
     }
 
 }
