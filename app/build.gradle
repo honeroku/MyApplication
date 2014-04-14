@@ -36,16 +36,42 @@ android {
     sourceSets {
         androidTest.setRoot('src/test')
     }
+    signingConfigs {
+        debug {
+            storeFile file("conf/myapplication.keystore")
+            storePassword "hogefuga"
+            keyAlias "myapplication"
+            keyPassword "hogefuga"
+        }
+        release {
+            storeFile file("conf/myapplication.keystore")
+            storePassword "hogefuga"
+            keyAlias "myapplication"
+            keyPassword "hogefuga"
+        }
+    }
     buildTypes {
         debug {
             // 開発用ビルド時に実行する各種の処理
             debuggable true  // デバッグフラグ
             zipAlign true  // zip アライン(apk ファイルの最適化)
             runProguard false  // ProGuard の実行
+            signingConfig signingConfigs.debug
         }
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.debug
+        }
+    }
+    productFlavors {
+        staging {
+            proguardFile 'proguard-rules.txt'
+            packageName "com.example.myapplication.staging"
+        }
+        production {
+            proguardFile 'proguard-rules.txt'
+            packageName "com.example.myapplication"
         }
     }
 }
